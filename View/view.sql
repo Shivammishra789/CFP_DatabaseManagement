@@ -17,7 +17,8 @@ SELECT * FROM makerPlan;
 
 /*  list candidates personal info whose education check has been verified */
 CREATE VIEW candidateInfo AS
-SELECT id, first_name, last_name, joining_date FROM fellowship_candidates 
-WHERE educational_info_filled = 1;
+SELECT fellowship_candidates.id, first_name, last_name, joining_date FROM fellowship_candidates
+INNER JOIN  candidates_education_det_check ON fellowship_candidates.id = candidates_education_det_check.candidate_id
+WHERE is_verified = 1;
 
 SELECT * FROM candidateInfo;

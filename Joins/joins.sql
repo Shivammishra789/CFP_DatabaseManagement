@@ -13,6 +13,7 @@ FROM fellowship_candidates
 LEFT JOIN user_details ON fellowship_candidates.id = user_details.id;
 
 /* self join */
-SELECT a.first_name AS Name, b.mobile_num AS MobileNo, b.hired_city AS City, a.joining_date AS 'Joining Date'
-FROM fellowship_candidates a, fellowship_candidates b
-WHERE a.id = b.id;
+SELECT b.first_name AS Name, a.mobile_num AS MobileNo, b.hired_city AS City, a.joining_date AS 'Joining Date'
+FROM fellowship_candidates a
+INNER JOIN fellowship_candidates b
+WHERE a.hired_city = b.hired_city AND b.first_name = 'Shivam';

@@ -2,7 +2,6 @@
 
 CREATE DATABASE candidate_management;
 use candidate_management;
-
 /* create tables */
 
 CREATE TABLE hired_candidates (
@@ -27,42 +26,42 @@ CREATE TABLE hired_candidates (
 	PRIMARY KEY (id)
 );
 
-
 CREATE TABLE fellowship_candidates (
-	id int NOT NULL,
-	first_name varchar(100) NOT NULL,
-	middle_name varchar(100) DEFAULT NULL,
-	last_name varchar(100) NOT NULL,
-	email varchar(50) NOT NULL,
-	mobile_num bigint NOT NULL,
-	hired_city varchar(50) NOT NULL,
-	hired_date datetime NOT NULL,
-	degree varchar(50) NOT NULL,
-	permanent_pincode int DEFAULT NULL,
-	hired_lab varchar(20) DEFAULT NULL,
-	attitude_remark varchar(15) DEFAULT NULL,
-	communication_remark varchar(15) DEFAULT NULL,
-	knowledge_remark varchar(15) DEFAULT NULL,
-	aggregate_remark varchar(15) DEFAULT NULL,
-	birth_date date NOT NULL,
-	is_birth_date_verified int DEFAULT 0,
-	parent_name varchar(50) DEFAULT NULL,
-	parent_occupation varchar(100) NOT NULL,
-	parent_mobile_num bigint NOT NULL,
-	parent_annual_sal double DEFAULT NULL,
-	local_addr varchar(255) NOT NULL,
-	permanent_addr varchar(250) DEFAULT NULL,
-	photo_path varchar(500) DEFAULT NULL,
-	joining_date date DEFAULT NULL,
-	candidate_status varchar(20) NOT NULL,
-	personal_info_filled int DEFAULT 0,
-	bank_info_filled int DEFAULT 0,
-	educational_info_filled int DEFAULT 0,
-	doc_status varchar(20) DEFAULT NULL,
-	remark varchar(150) DEFAULT NULL,
-	creator_stamp datetime DEFAULT NULL,
-	creator_user int DEFAULT NULL,
-	PRIMARY KEY (id)
+  id int(11) NOT NULL,
+  first_name varchar(100) NOT NULL,
+  middle_name varchar(100) DEFAULT NULL,
+  last_name varchar(100) NOT NULL,
+  email varchar(50) NOT NULL,
+  mobile_num bigint(20) NOT NULL,
+  hired_city varchar(50) NOT NULL,
+  hired_date datetime NOT NULL,
+  degree varchar(50) NOT NULL,
+  aggr_per double DEFAULT NULL,
+  current_pincode int(11) DEFAULT NULL,
+  permanent_pincode int(11) DEFAULT NULL,
+  hired_lab varchar(20) DEFAULT NULL,
+  attitude_remark varchar(15) DEFAULT NULL,
+  communication_remark varchar(15) DEFAULT NULL,
+  knowledge_remark varchar(15) DEFAULT NULL,
+  birth_date date NOT NULL,
+  is_birth_date_verified int (1) DEFAULT 0,
+  parent_name varchar(50) DEFAULT NULL,
+  parent_occupation varchar(100) NOT NULL,
+  parent_mobile_num bigint(20) NOT NULL,
+  parent_annual_sal double DEFAULT NULL,
+  local_addr varchar(255) NOT NULL,
+  permanent_addr varchar(150) DEFAULT NULL,
+  photo_path varchar(500) DEFAULT NULL,
+  joining_date date DEFAULT NULL,
+  candidate_status varchar(20) NOT NULL,
+  personal_info_filled int (3) DEFAULT 0,
+  bank_info_filled int (3) DEFAULT 0,
+  educational_info_filled int (3) DEFAULT 0,
+  doc_status varchar(20) DEFAULT NULL,
+  remark varchar(150) DEFAULT NULL,
+  creator_stamp datetime DEFAULT NULL,
+  creator_user int(11) DEFAULT NULL,
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE candidates_personal_det_check (
@@ -76,6 +75,8 @@ CREATE TABLE candidates_personal_det_check (
 	creator_user int DEFAULT NULL
 );
 
+ALTER TABLE candidates_personal_det_check 
+ADD CONSTRAINT `FK_candidate_per_detail_check_id` FOREIGN KEY (candidate_id) REFERENCES fellowship_candidates(id);
 
 CREATE TABLE candidate_bank_det(
 	id int(11) NOT NULL,
@@ -95,6 +96,9 @@ CREATE TABLE candidate_bank_det(
 	creator_user int(11) DEFAULT NULL,
 	PRIMARY KEY (id)
 );
+
+ALTER TABLE candidate_bank_det 
+ADD CONSTRAINT `FK_candidate_bank_detail_id` FOREIGN KEY (candidate_id) REFERENCES fellowship_candidates(id);
 
 CREATE TABLE candidate_qualification(
 	id int(11) NOT NULL,
@@ -122,8 +126,6 @@ CREATE TABLE candidate_qualification(
 	PRIMARY KEY (id)
 );
 
-
-
 CREATE TABLE candidates_education_det_check (
 	id int(11) NOT NULL,
 	candidate_id  int (11) NOT NULL,
@@ -135,6 +137,8 @@ CREATE TABLE candidates_education_det_check (
 	creator_user int(11) DEFAULT NULL
 );
 
+ALTER TABLE candidates_education_det_check 
+ADD CONSTRAINT `FK_candidate_edu_detail_check_id` FOREIGN KEY (candidate_id) REFERENCES fellowship_candidates(id);
 
 CREATE TABLE candidate_docs(
 	id int(11) NOT NULL,
@@ -149,7 +153,6 @@ CREATE TABLE candidate_docs(
 	PRIMARY KEY (id)
 );
 
-
 CREATE TABLE user_details (
 	id int(11) NOT NULL,
 	email varchar(50) NOT NULL,
@@ -161,7 +164,6 @@ CREATE TABLE user_details (
 	PRIMARY KEY (id),
 	UNIQUE KEY UK_4d9rdl7d52k8x3etihxlaujvh (email)
 );
-
 
 CREATE TABLE user_roles (
 	user_id int(11)NOT NULL ,
@@ -220,8 +222,6 @@ CREATE TABLE maker_program (
 	PRIMARY KEY (id)
 );
 
-
-
 CREATE TABLE lab(
 	id int(11) NOT NULL,
 	name varchar(50) DEFAULT NULL,
@@ -262,8 +262,6 @@ CREATE TABLE app_parameters (
 	KEY app_parameters_1 (key_type,  key_value)
 );
 
-
-
 CREATE TABLE mentor(
 	id int(11) NOT NULL,
 	name varchar(50) DEFAULT NULL,
@@ -276,8 +274,6 @@ CREATE TABLE mentor(
 	CONSTRAINT `FK_mentor_lab_id` FOREIGN KEY (`lab_id`) REFERENCES `mentor` (`id`),
 	PRIMARY KEY (id)
 );
-
-
 
 CREATE TABLE mentor_ideation_map(
 	id int(11) NOT NULL,
@@ -305,8 +301,6 @@ CREATE TABLE mentor_techstack(
 	`tech_stack` (`id`)
 );
 
-
-
 CREATE TABLE company_requirement(
 	id int(11) NOT NULL,
 	company_id int(11) NOT NULL,
@@ -331,6 +325,9 @@ CREATE TABLE company_requirement(
 	PRIMARY KEY(id)
 );
 
+ALTER TABLE company_requirement
+ADD CONSTRAINT `FK_company_id` FOREIGN KEY (company_id) REFERENCES company(id);
+
 CREATE TABLE candidate_techstack_assignment(
 	id int(11) NOT NULL,
 	requirement_id int(11) NOT NULL,
@@ -346,6 +343,9 @@ CREATE TABLE candidate_techstack_assignment(
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE company_trash(
+ company_name varchar(100) NOT NULL,
+ date_deleted date NOT NULL);
 
 CREATE TABLE temporary_MIS(
 	Date_Time DATE NOT NULL,

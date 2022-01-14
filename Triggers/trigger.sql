@@ -28,11 +28,10 @@ DELIMITER $$
 	CREATE TRIGGER after_company_delete
 	AFTER DELETE ON company FOR EACH ROW
 	BEGIN
-		IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES
-				    WHERE TABLE_NAME = N'company_trash')
-			THEN 	INSERT INTO company_trash
-					VALUES (old.name, CURDATE());
-		ELSE CREATE TABLE compant_trash(comapany_name VARCHAR(80) NOT NULL, deleted_date DATE NOT NULL);
-		END IF;
+		INSERT INTO company_trash
+		VALUES (old.name, CURDATE());
 	END$$
   DELIMITER ;
+
+DELETE FROM company where name='TCS';
+  select * from company_trash;
