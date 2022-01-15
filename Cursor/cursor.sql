@@ -27,7 +27,7 @@ DELIMITER $$
 CREATE PROCEDURE proc_email_ids_of_android_persons(INOUT email_list varchar(1000))
 BEGIN
 	DECLARE email_id varchar(100);
-    DECLARE finish INTEGER DEFAULT 0;
+	DECLARE finish INTEGER DEFAULT 0;
 	DECLARE C1 CURSOR FOR SELECT DISTINCT user_name FROM temporary_mis WHERE technology = 'android';
     DECLARE CONTINUE HANDLER for NOT FOUND set finish = 1;
     OPEN C1;
