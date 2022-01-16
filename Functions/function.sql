@@ -20,7 +20,7 @@ RETURNS VARCHAR(150)
 DETERMINISTIC
 BEGIN
 	DECLARE fullName varchar(128);
-		SELECT CONCAT(first_name,' ', COALESCE(middle_name,''), ' ', last_name) INTO fullName FROM fellowship_candidates WHERE id = candidate_id;
+	SELECT CONCAT(first_name,' ', COALESCE(middle_name,''), ' ', last_name) INTO fullName FROM fellowship_candidates WHERE id = candidate_id;
 	RETURN fullName;
 END$$
 DELIMITER ;
