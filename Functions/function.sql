@@ -7,11 +7,11 @@ DETERMINISTIC
 BEGIN
 	DECLARE age int;
 	SELECT YEAR(CURDATE()) - YEAR(DOB) INTO year;
-    return age;
+	RETURN age;
 END$$
 DELIMITER ;
 
- select fun_getAge('1998/09/28') as CandidateAge; 
+SELECT fun_getAge('1998/09/28') as CandidateAge; 
     
 /* Get the full name of the candidate by candidate_id */
 DELIMITER $$
@@ -35,8 +35,8 @@ DETERMINISTIC
 BEGIN
 	CASE
 		WHEN cpu_percent > 80 THEN  RETURN 'cpu percent is high';
-        WHEN cpu_percent < 80 THEN RETURN 'cpu percent is normal';
-        ELSE RETURN 'low';
+		WHEN cpu_percent < 80 THEN RETURN 'cpu percent is normal';
+		ELSE RETURN 'low';
 	END CASE;
 END$$
 DELIMITER ;
@@ -51,7 +51,7 @@ DETERMINISTIC
 BEGIN
 	DECLARE get_company_count varchar(160);
 	SELECT COUNT(companyLocation) INTO get_company_count FROM company WHERE location = companyLocation;
-    RETURN get_company_count;
+	RETURN get_company_count;
 END$$
 DELIMITER ;
     
