@@ -42,10 +42,10 @@ BEGIN
 	START TRANSACTION;
 		INSERT INTO company(id, name, address, location)
 		VALUES (sp_id, sp_name, sp_address, sp_location);
-		INSERT INTO company_requirement(id, company_id, candidate_id, requested_month, city, no_of_engg, 
-	                                    tech_stack_id, tech_type_id, maker_programs_id, lead_id)
+		INSERT INTO company_requirement(id, company_id, candidate_id, requested_month, city, no_of_engg,
+                                        tech_stack_id, tech_type_id, maker_programs_id, lead_id)
 		VALUES (sp_comp_req, sp_id, sp_cand_id, sp_requested_month, sp_city, sp_no_of_engg, sp_tech_stack_id,
-	            sp_tech_type_id, sp_maker_programs_id, sp_lead_id );
+                sp_tech_type_id, sp_maker_programs_id, sp_lead_id );
 	COMMIT;
 	SELECT 'TRANSACTION SUCCESSFUl';
 END$$
