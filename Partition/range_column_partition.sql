@@ -31,8 +31,8 @@ PARTITION BY RANGE COLUMNS ( degree, permanent_pincode) (
 
 
 INSERT INTO hired_citizen (id, first_name, middle_name, last_name, email, mobile_num, hired_city, hired_date, degree, permanent_pincode, 
-							hired_lab, attitude_remark, communication_remark, knowledge_remark,
-                            aggregate_remark, status,creator_stamp,creator_user )
+                           hired_lab, attitude_remark, communication_remark, knowledge_remark,
+                           aggregate_remark, status,creator_stamp,creator_user )
 VALUES 
 	(101,"Mukul",Null, "Jain", "mk@gmail.com", 8847994455, "Gudgoan", "2015-05-05 14:20:56","BA", 224555, 
 	"EasyRewarz", "Great Vision", "Excellent", "Excellent", "Excellent", "active","2022-01-01 12:20:56",1),
