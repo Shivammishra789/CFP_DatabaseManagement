@@ -22,9 +22,10 @@ CREATE TABLE hired_engineers(
 	PRIMARY KEY (id,hired_date)
 )
 PARTITION BY RANGE ( YEAR(hired_date) ) (
-    PARTITION p2015 VALUES LESS THAN (2015),
-    PARTITION p2016 VALUES LESS THAN (2016),
-    PARTITION p2017 VALUES LESS THAN (2017),
+    PARTITION p2014 VALUES LESS THAN (2015),
+    PARTITION p2015 VALUES LESS THAN (2016),
+    PARTITION p2016 VALUES LESS THAN (2017),
+    PARTITION p2017 VALUES LESS THAN (2018),
     PARTITION p_max_year VALUES LESS THAN MAXVALUE
 );
 
@@ -46,6 +47,11 @@ VALUES
      (106,"Sam",null, "Mishra", "sm@gmail.com", 8878894455, "Pune", "2016-04-07 14:20:56","Btech", 245255, 
 	"Bifin Minds", "Great Vision", "Excellent", "Excellent", "Excellent", "active","2022-04-07 14:20:56",5);
     
-    EXPLAIN SELECT * FROM hired_engineers WHERE hired_date = '2015-05-05 14:20:56';
-    
-    
+
+EXPLAIN SELECT * FROM hired_engineers WHERE hired_date = '2015-05-05 14:20:56';
++----+-------------+-----------------+------------+------+---------------+------+---------+------+------+----------+-------------+
+| id | select_type | table           | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra       |
++----+-------------+-----------------+------------+------+---------------+------+---------+------+------+----------+-------------+
+|  1 | SIMPLE      | hired_engineers | p2015      | ALL  | NULL          | NULL | NULL    | NULL |    2 |    50.00 | Using where |
++----+-------------+-----------------+------------+------+---------------+------+---------+------+------+----------+-------------+
+
