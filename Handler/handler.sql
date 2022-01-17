@@ -4,9 +4,9 @@ use candidate_management;
 DELIMITER //
 CREATE PROCEDURE getFullName( IN f_id varchar(100))
 BEGIN
-	declare incorrectFormat condition for 1366;
-	declare exit handler for incorrectFormat
-	signal sqlstate '45000' set message_text='please enter integer format for id'; 
+	DECLARE incorrectFormat CONDITION FOR 1366;
+	DECLARE EXIT HANDLER FOR incorrectFormat
+	SIGNAL SQLSTATE '45000' SET message_text='please enter integer format for id'; 
 	SELECT fun_FullName(f_id);
 END //
 DELIMITER ;
@@ -20,7 +20,7 @@ BEGIN
 		BEGIN
 			SELECT 'EXCEPTION OCCURED';
 		END;
-    SELECT * FROM candidateInfo;
+	SELECT * FROM candidateInfo;
 END//
 DELIMITER ;
 	
