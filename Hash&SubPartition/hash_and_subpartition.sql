@@ -14,7 +14,7 @@ PARTITION p1_disc_below150k VALUES LESS THAN (150000),
 PARTITION p2_disc_below300k VALUES LESS THAN (300000),
 PARTITION p3_disc_above300k VALUES LESS THAN MAXVALUE
 );
-select * from log_subpart;
+
 INSERT INTO log_subpart SELECT user_name, technology, disk_write_count FROM temporary_MIS ORDER BY disk_write_count;
 
 SELECT TABLE_NAME, PARTITION_NAME, SUBPARTITION_NAME, TABLE_ROWS FROM INFORMATION_SCHEMA.PARTITIONS WHERE TABLE_NAME = 'log_subpart';
@@ -35,6 +35,7 @@ SELECT TABLE_NAME, PARTITION_NAME, SUBPARTITION_NAME, TABLE_ROWS FROM INFORMATIO
 | log_subpart | p3_remain         | p3_remainsp2         |         55 |
 +-------------+-------------------+----------------------+------------+
 
+
 EXPLAIN SELECT * FROM log_subpart WHERE disc_write_count = 432803;
 +----+-------------+-------------+------------------------+------+---------------+------+---------+------+------+----------+-------------+
 | id | select_type | table       | partitions             | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra       |
@@ -42,9 +43,11 @@ EXPLAIN SELECT * FROM log_subpart WHERE disc_write_count = 432803;
 |  1 | SIMPLE      | log_subpart | p3_remain_p3_remainsp0 | ALL  | NULL          | NULL | NULL    | NULL |   54 |    10.00 | Using where |
 +----+-------------+-------------+------------------------+------+---------------+------+---------+------+------+----------+-------------+
 
+
 EXPLAIN SELECT * FROM log_subpart WHERE disc_write_count = 271850;
 +----+-------------+-------------+----------------------------------------+------+---------------+------+---------+------+------+----------+-------------+
 | id | select_type | table       | partitions                             | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra       |
 +----+-------------+-------------+----------------------------------------+------+---------------+------+---------+------+------+----------+-------------+
 |  1 | SIMPLE      | log_subpart | p2_disc_below300k_p2_disc_below300ksp0 | ALL  | NULL          | NULL | NULL    | NULL |   56 |    10.00 | Using where |
 +----+-------------+-------------+----------------------------------------+------+---------------+------+---------+------+------+----------+-------------+
+
