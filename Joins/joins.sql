@@ -17,25 +17,3 @@ SELECT b.first_name AS Name, b.mobile_num AS MobileNo, b.hired_city AS City, b.j
 FROM fellowship_candidates a
 INNER JOIN fellowship_candidates b
 WHERE a.hired_city = b.hired_city AND b.first_name = 'Shivam';
-show plugins;
-SHOW VARIABLES LIKE '%version%';
-CREATE TABLE rc1 (
-    a INT,
-    b INT
-)
-PARTITION BY RANGE COLUMNS(a, b) (
-    PARTITION p0 VALUES LESS THAN (5, 12),
-    PARTITION p3 VALUES LESS THAN (MAXVALUE, MAXVALUE)
-);
-
-INSERT INTO rc1 (a,b) VALUES (4,11);
-INSERT INTO rc1 (a,b) VALUES (5,11);
-INSERT INTO rc1 (a,b) VALUES (6,11);
-INSERT INTO rc1 (a,b) VALUES (4,12);
-INSERT INTO rc1 (a,b) VALUES (5,12);
-INSERT INTO rc1 (a,b) VALUES (6,12);
-INSERT INTO rc1 (a,b) VALUES (4,13);
-INSERT INTO rc1 (a,b) VALUES (5,13);
-INSERT INTO rc1 (a,b) VALUES (6,13);
-describe rc1;
-select * from rc1 partition(p3);
