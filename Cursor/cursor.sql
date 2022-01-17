@@ -1,4 +1,5 @@
 /* Define a stored procedure to get a list of company names from the company table using cursor*/
+
 DELIMITER $$
 CREATE PROCEDURE proc_comp_list()
 BEGIN
@@ -8,15 +9,15 @@ BEGIN
 	DECLARE C1 CURSOR FOR SELECT name FROM company;
 	DECLARE CONTINUE HANDLER for NOT FOUND set finish = 1;
 	OPEN C1;
-	get_company: LOOP
-FETCH c1 INTO company_name;
-IF finish = 1 THEN
-LEAVE get_company;
-END IF;
-SET comp_list = CONCAT(company_name,',',comp_list);
-END LOOP get_company;
-SELECT comp_list;
-CLOSE c1;
+		get_company: LOOP
+			FETCH c1 INTO company_name;
+				IF finish = 1 THEN
+					LEAVE get_company;
+				END IF;
+			SET comp_list = CONCAT(company_name,',',comp_list);
+		END LOOP get_company;
+		SELECT comp_list;
+	CLOSE c1;
 END$$
 DELIMITER ;
 
@@ -26,19 +27,19 @@ CALL proc_comp_list;
 DELIMITER $$
 CREATE PROCEDURE proc_email_ids_of_android_persons(INOUT email_list varchar(1000))
 BEGIN
-DECLARE email_id varchar(100);
-DECLARE finish INTEGER DEFAULT 0;
-DECLARE C1 CURSOR FOR SELECT DISTINCT user_name FROM temporary_mis WHERE technology = 'android';
-DECLARE CONTINUE HANDLER for NOT FOUND set finish = 1;
-OPEN C1;
-get_email: LOOP
-FETCH c1 INTO email_id;
-IF finish = 1 THEN
-LEAVE get_email;
-END IF;
-SET email_list = CONCAT(email_id,',',email_list);
-END LOOP get_email;
-CLOSE c1;
+	DECLARE email_id varchar(100);
+	DECLARE finish INTEGER DEFAULT 0;
+	DECLARE C1 CURSOR FOR SELECT DISTINCT user_name FROM temporary_mis WHERE technology = 'android';
+	DECLARE CONTINUE HANDLER for NOT FOUND set finish = 1;
+	OPEN C1;
+		get_email: LOOP
+			FETCH c1 INTO email_id;
+				IF finish = 1 THEN
+					LEAVE get_email;
+				END IF;
+			SET email_list = CONCAT(email_id,',',email_list);
+		END LOOP get_email;
+	CLOSE c1;
 END$$
 DELIMITER ;
 
