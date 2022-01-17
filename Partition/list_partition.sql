@@ -21,15 +21,15 @@ CREATE TABLE hired_students(
 	creator_user int DEFAULT NULL
 )
 PARTITION BY LIST (permanent_pincode) (
-    PARTITION p_north VALUES IN (442255, 448255),
-    PARTITION p_east VALUES IN (222255),
-    PARTITION p_west VALUES IN (245255)
+	PARTITION p_north VALUES IN (442255, 448255),
+	PARTITION p_east VALUES IN (222255),
+	PARTITION p_west VALUES IN (245255)
 );
 
 
 INSERT INTO hired_students (id, first_name, middle_name, last_name, email, mobile_num, hired_city, hired_date, degree, permanent_pincode, 
-							  hired_lab, attitude_remark, communication_remark, knowledge_remark,
-                              aggregate_remark, status,creator_stamp,creator_user )
+                            hired_lab, attitude_remark, communication_remark, knowledge_remark,
+                            aggregate_remark, status,creator_stamp,creator_user )
 VALUES 
 	(101,"Mukul",Null, "Jain", "mk@gmail.com", 8847994455, "Gudgoan", "2015-05-05 14:20:56","Btech", 442255, 
 	"EasyRewarz", "Great Vision", "Excellent", "Excellent", "Excellent", "active","2022-01-01 12:20:56",1),
@@ -39,9 +39,9 @@ VALUES
 	"Bifin", "Great Vision", "Excellent", "Excellent", "Excellent", "active","2022-04-03 14:20:56",4),
 	(104,"Manali",null, "Wani", "mw@gmail.com", 8577994455, "Jaipur", "2015-04-07 14:20:56","Btech", 222255, 
 	"Happiest Minds", "Great Vision", "Excellent", "Excellent", "Excellent", "active","2022-04-07 14:20:56",5),
-    (105,"SHivam",null, "Mishra", "sm@gmail.com", 8877994455, "Pune", "2017-04-07 14:20:56","Btech", 222255, 
+	(105,"SHivam",null, "Mishra", "sm@gmail.com", 8877994455, "Pune", "2017-04-07 14:20:56","Btech", 222255, 
 	"Happiest Minds", "Great Vision", "Excellent", "Excellent", "Excellent", "active","2022-04-07 14:20:56",5),
-     (106,"Sam",null, "Mishra", "sm@gmail.com", 8878894455, "Pune", "2016-04-07 14:20:56","Btech", 245255, 
+	(106,"Sam",null, "Mishra", "sm@gmail.com", 8878894455, "Pune", "2016-04-07 14:20:56","Btech", 245255, 
 	"Bifin Minds", "Great Vision", "Excellent", "Excellent", "Excellent", "active","2022-04-07 14:20:56",5);
     
 
